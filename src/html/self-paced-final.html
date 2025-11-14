@@ -57,7 +57,7 @@
                   </div>
                   <div class="w-auto lg:hidden">
                     <button @click="mobileNavOpen = true" class="p-2 text-indigo-600 hover:bg-indigo-50 focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/40 rounded-lg transition-colors" aria-label="Toggle menu">
-                      <svg class="w-6 h-6" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <svg class="w-6 h-6" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                         <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round"></path>
                       </svg>
                     </button>
@@ -66,16 +66,16 @@
               </div>
             </div>
             <!-- Mobile Navigation Menu -->
-            <div x-show="mobileNavOpen" class="fixed inset-0 z-50 lg:hidden">
-              <div class="fixed inset-0 bg-slate-900 bg-opacity-50" @click="mobileNavOpen = false"></div>
-              <nav class="fixed top-0 left-0 bottom-0 w-4/6 sm:max-w-xs bg-white h-full overflow-y-auto shadow-xl">
+            <div x-show="mobileNavOpen" class="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-labelledby="mobile-nav-title">
+              <div class="fixed inset-0 bg-slate-900 bg-opacity-50" @click="mobileNavOpen = false" aria-hidden="true"></div>
+              <nav class="fixed top-0 left-0 bottom-0 w-4/6 sm:max-w-xs bg-white h-full overflow-y-auto shadow-xl" aria-label="Mobile navigation">
                 <div class="flex flex-col h-full px-6 pt-6">
                   <div class="flex items-center justify-between mb-8">
                     <a class="inline-block focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/40 rounded-lg" href="#" aria-label="Home">
                       <img class="h-10" src="images/centa-logo.svg" alt="CENTA">
                     </a>
                     <button @click="mobileNavOpen = false" class="p-2 hover:bg-slate-100 focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/40 rounded-lg transition-colors" aria-label="Close menu">
-                      <svg width="24" height="24" viewbox="0 0 24 24" fill="none">
+                      <svg width="24" height="24" viewbox="0 0 24 24" fill="none" aria-hidden="true">
                         <path d="M6 18L18 6M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                       </svg>
                     </button>
@@ -83,16 +83,20 @@
                   <div class="flex-1 py-8">
                     <ul class="space-y-6">
                       <!-- Section Header - NOT clickable -->
-                      <li class="text-sm font-bold text-indigo-600 uppercase tracking-wide pointer-events-none">For Teachers</li>
+                      <li>
+                        <span class="text-sm font-bold text-indigo-600 uppercase tracking-wide" id="mobile-nav-title">For Teachers</span>
+                      </li>
                       <!-- Clickable Menu Items -->
                       <li><a class="block text-base font-medium text-slate-700 hover:text-indigo-600 focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/40 transition-colors duration-200" href="#">Courses</a></li>
                       <li><a class="block text-base font-medium text-slate-700 hover:text-indigo-600 focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/40 transition-colors duration-200" href="#">Live Events</a></li>
                       <li><a class="block text-base font-medium text-slate-700 hover:text-indigo-600 focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/40 transition-colors duration-200" href="#">Teacher Certification</a></li>
                       <li><a class="block text-base font-medium text-slate-700 hover:text-indigo-600 focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/40 transition-colors duration-200" href="#">Community</a></li>
                       <li><a class="block text-base font-medium text-slate-700 hover:text-indigo-600 focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/40 transition-colors duration-200" href="#">Job Search</a></li>
-                      <!-- Divider -->
-                      <li class="border-t border-slate-200 pt-6">
-                      </li><li><a class="block text-base font-medium text-slate-700 hover:text-indigo-600 focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/40 transition-colors duration-200" href="#">For Schools</a></li>
+                    </ul>
+                    <!-- Divider -->
+                    <div class="border-t border-slate-200 my-6" role="separator"></div>
+                    <ul class="space-y-6">
+                      <li><a class="block text-base font-medium text-slate-700 hover:text-indigo-600 focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/40 transition-colors duration-200" href="#">For Schools</a></li>
                       <li><a class="block text-base font-medium text-slate-700 hover:text-indigo-600 focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/40 transition-colors duration-200" href="#">For Parents</a></li>
                       <li><a class="block text-base font-medium text-slate-700 hover:text-indigo-600 focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/40 transition-colors duration-200" href="#">For Governments</a></li>
                     </ul>

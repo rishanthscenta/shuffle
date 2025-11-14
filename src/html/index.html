@@ -78,9 +78,9 @@
               </div>
             </div>
             <!-- Mobile Navigation Menu -->
-            <div x-show="mobileNavOpen" class="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-label="Mobile navigation menu">
+            <div x-show="mobileNavOpen" class="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-labelledby="mobile-nav-title">
               <div class="fixed inset-0 bg-slate-900 bg-opacity-50" @click="mobileNavOpen = false" aria-hidden="true"></div>
-              <nav class="fixed top-0 left-0 bottom-0 w-4/6 sm:max-w-xs bg-white h-full overflow-y-auto shadow-xl">
+              <nav class="fixed top-0 left-0 bottom-0 w-4/6 sm:max-w-xs bg-white h-full overflow-y-auto shadow-xl" aria-label="Mobile navigation">
                 <div class="flex flex-col h-full px-6 pt-6">
                   <div class="flex items-center justify-between mb-8">
                     <a class="inline-block focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/40 rounded-lg" href="#" aria-label="Home">
@@ -95,7 +95,9 @@
                   <div class="flex-1 py-8">
                     <ul class="space-y-6">
                       <!-- Section Header - NOT clickable -->
-                      <li class="text-sm font-bold text-indigo-600 uppercase tracking-wide pointer-events-none">For Teachers</li>
+                      <li>
+                        <span class="text-sm font-bold text-indigo-600 uppercase tracking-wide" id="mobile-nav-title">For Teachers</span>
+                      </li>
                       <!-- Clickable Menu Items -->
                       <li><a class="block text-base font-medium text-slate-700 hover:text-indigo-600 focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/40 transition-colors duration-200" href="#">Courses</a></li>
                       <li><a class="block text-base font-medium text-slate-700 hover:text-indigo-600 focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/40 transition-colors duration-200" href="#">Live Events</a></li>
@@ -104,7 +106,7 @@
                       <li><a class="block text-base font-medium text-slate-700 hover:text-indigo-600 focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/40 transition-colors duration-200" href="#">Job Search</a></li>
                     </ul>
                     <!-- Divider -->
-                    <div class="border-t border-slate-200 my-6"></div>
+                    <div class="border-t border-slate-200 my-6" role="separator"></div>
                     <ul class="space-y-6">
                       <li><a class="block text-base font-medium text-slate-700 hover:text-indigo-600 focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/40 transition-colors duration-200" href="#">For Schools</a></li>
                       <li><a class="block text-base font-medium text-slate-700 hover:text-indigo-600 focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/40 transition-colors duration-200" href="#">For Parents</a></li>

@@ -11,6 +11,18 @@
     <link rel="stylesheet" href="css/tailwind/tailwind.min.css">
     <link rel="icon" type="image/png" sizes="32x32" href="shuffle-for-tailwind.png">
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" defer></script>
+    <style>
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .marquee-content {
+            animation: marquee 30s linear infinite;
+        }
+        .marquee-content:hover {
+            animation-play-state: paused;
+        }
+    </style>
 </head>
 <body class="antialiased bg-body text-body font-body">
     <div class="">
@@ -57,7 +69,7 @@
                   </div>
                   <div class="w-auto lg:hidden">
                     <button @click="mobileNavOpen = true" class="p-2 text-indigo-600 hover:bg-indigo-50 focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/40 rounded-lg transition-colors" aria-label="Toggle menu">
-                      <svg class="w-6 h-6" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <svg class="w-6 h-6" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                         <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round"></path>
                       </svg>
                     </button>
@@ -66,16 +78,16 @@
               </div>
             </div>
             <!-- Mobile Navigation Menu -->
-            <div x-show="mobileNavOpen" class="fixed inset-0 z-50 lg:hidden">
-              <div class="fixed inset-0 bg-slate-900 bg-opacity-50" @click="mobileNavOpen = false"></div>
-              <nav class="fixed top-0 left-0 bottom-0 w-4/6 sm:max-w-xs bg-white h-full overflow-y-auto shadow-xl">
+            <div x-show="mobileNavOpen" class="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-labelledby="mobile-nav-title">
+              <div class="fixed inset-0 bg-slate-900 bg-opacity-50" @click="mobileNavOpen = false" aria-hidden="true"></div>
+              <nav class="fixed top-0 left-0 bottom-0 w-4/6 sm:max-w-xs bg-white h-full overflow-y-auto shadow-xl" aria-label="Mobile navigation">
                 <div class="flex flex-col h-full px-6 pt-6">
                   <div class="flex items-center justify-between mb-8">
                     <a class="inline-block focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/40 rounded-lg" href="#" aria-label="Home">
                       <img class="h-10" src="images/centa-logo.svg" alt="CENTA">
                     </a>
                     <button @click="mobileNavOpen = false" class="p-2 hover:bg-slate-100 focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/40 rounded-lg transition-colors" aria-label="Close menu">
-                      <svg width="24" height="24" viewbox="0 0 24 24" fill="none">
+                      <svg width="24" height="24" viewbox="0 0 24 24" fill="none" aria-hidden="true">
                         <path d="M6 18L18 6M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                       </svg>
                     </button>
@@ -83,16 +95,20 @@
                   <div class="flex-1 py-8">
                     <ul class="space-y-6">
                       <!-- Section Header - NOT clickable -->
-                      <li class="text-sm font-bold text-indigo-600 uppercase tracking-wide pointer-events-none">For Teachers</li>
+                      <li>
+                        <span class="text-sm font-bold text-indigo-600 uppercase tracking-wide" id="mobile-nav-title">For Teachers</span>
+                      </li>
                       <!-- Clickable Menu Items -->
                       <li><a class="block text-base font-medium text-slate-700 hover:text-indigo-600 focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/40 transition-colors duration-200" href="#">Courses</a></li>
                       <li><a class="block text-base font-medium text-slate-700 hover:text-indigo-600 focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/40 transition-colors duration-200" href="#">Live Events</a></li>
                       <li><a class="block text-base font-medium text-slate-700 hover:text-indigo-600 focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/40 transition-colors duration-200" href="#">Teacher Certification</a></li>
                       <li><a class="block text-base font-medium text-slate-700 hover:text-indigo-600 focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/40 transition-colors duration-200" href="#">Community</a></li>
                       <li><a class="block text-base font-medium text-slate-700 hover:text-indigo-600 focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/40 transition-colors duration-200" href="#">Job Search</a></li>
-                      <!-- Divider -->
-                      <li class="border-t border-slate-200 pt-6">
-                      </li><li><a class="block text-base font-medium text-slate-700 hover:text-indigo-600 focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/40 transition-colors duration-200" href="#">For Schools</a></li>
+                    </ul>
+                    <!-- Divider -->
+                    <div class="border-t border-slate-200 my-6" role="separator"></div>
+                    <ul class="space-y-6">
+                      <li><a class="block text-base font-medium text-slate-700 hover:text-indigo-600 focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/40 transition-colors duration-200" href="#">For Schools</a></li>
                       <li><a class="block text-base font-medium text-slate-700 hover:text-indigo-600 focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/40 transition-colors duration-200" href="#">For Parents</a></li>
                       <li><a class="block text-base font-medium text-slate-700 hover:text-indigo-600 focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/40 transition-colors duration-200" href="#">For Governments</a></li>
                     </ul>
@@ -109,8 +125,8 @@
                 
       <div class="bg-sky-50 shadow-sm border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 py-3 text-center">
-          <span class="font-medium text-base sm:text-lg text-slate-700">Enrollment for the next test slot (Oct 15, 2025) closes in</span>
-          <span class="font-bold text-base sm:text-lg text-indigo-600 ml-2 whitespace-nowrap">2d 12h 41m 58s</span>
+          <span class="font-medium text-base sm:text-lg text-slate-700">Enrollment for the next test slot (Dec 15, 2025) closes in</span>
+          <span class="font-bold text-base sm:text-lg text-indigo-600 ml-2 whitespace-nowrap">30d 12h 41m 58s</span>
         </div>
       </div>
                 
@@ -130,7 +146,7 @@
                   </div>
                   <div class="w-full md:w-auto">
                     <button class="inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-semibold text-slate-900 bg-white rounded-xl border border-slate-300 hover:border-slate-400 hover:bg-slate-50 focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/40 transition-all duration-200 shadow-sm w-full" type="button">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewbox="0 0 19 18" fill="none" class="h-5 w-5">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewbox="0 0 19 18" fill="none" class="h-5 w-5" aria-hidden="true">
                         <path d="M4.75 3.75C3.64543 3.75 2.75 4.64543 2.75 5.75V11.75C2.75 12.8546 3.64543 13.75 4.75 13.75H6.5V16.5L9.5 13.75H14.25C15.3546 13.75 16.25 12.8546 16.25 11.75V5.75C16.25 4.64543 15.3546 3.75 14.25 3.75H4.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                         <circle cx="6.5" cy="8.75" r="0.75" fill="currentColor"></circle>
                         <circle cx="9.5" cy="8.75" r="0.75" fill="currentColor"></circle>
@@ -146,21 +162,21 @@
                   <div class="flex gap-3 overflow-x-auto pb-4">
                     <div class="flex-shrink-0">
                       <div class="bg-white px-5 py-4 rounded-xl border border-slate-300 shadow-sm">
-                        <p class="text-base font-semibold text-slate-900 mb-1 whitespace-nowrap">Oct 15, 2025</p>
+                        <p class="text-base font-semibold text-slate-900 mb-1 whitespace-nowrap">Dec 15, 2025</p>
                         <p class="text-sm text-slate-700 font-medium whitespace-nowrap">10:00 AM IST</p>
                         <p class="text-sm text-red-600 font-medium mt-2 whitespace-nowrap">23 seats left ⚡</p>
                       </div>
                     </div>
                     <div class="flex-shrink-0">
                       <div class="bg-white px-5 py-4 rounded-xl border border-slate-300 shadow-sm">
-                        <p class="text-base font-semibold text-slate-900 mb-1 whitespace-nowrap">Nov 1, 2025</p>
+                        <p class="text-base font-semibold text-slate-900 mb-1 whitespace-nowrap">Jan 5, 2026</p>
                         <p class="text-sm text-slate-700 font-medium whitespace-nowrap">10:00 AM IST</p>
                         <p class="text-sm text-green-700 font-medium mt-2 whitespace-nowrap">45 seats left</p>
                       </div>
                     </div>
                     <div class="flex-shrink-0">
                       <div class="bg-white px-5 py-4 rounded-xl border border-slate-300 shadow-sm">
-                        <p class="text-base font-semibold text-slate-900 mb-1 whitespace-nowrap">Nov 20, 2025</p>
+                        <p class="text-base font-semibold text-slate-900 mb-1 whitespace-nowrap">Jan 20, 2026</p>
                         <p class="text-sm text-slate-700 font-medium whitespace-nowrap">2:00 PM IST</p>
                         <p class="text-sm text-green-700 font-medium mt-2 whitespace-nowrap">50 seats left</p>
                       </div>
@@ -178,21 +194,21 @@
                   <div class="flex gap-3 overflow-x-auto pb-4 snap-x snap-mandatory">
                     <div class="flex-shrink-0 snap-start">
                       <div class="bg-white px-5 py-4 rounded-xl border border-slate-300 shadow-sm">
-                        <p class="text-base font-semibold text-slate-900 mb-1 whitespace-nowrap">Oct 15, 2025</p>
+                        <p class="text-base font-semibold text-slate-900 mb-1 whitespace-nowrap">Dec 15, 2025</p>
                         <p class="text-sm text-slate-700 font-medium whitespace-nowrap">10:00 AM IST</p>
                         <p class="text-sm text-red-600 font-medium mt-2 whitespace-nowrap">23 seats left ⚡</p>
                       </div>
                     </div>
                     <div class="flex-shrink-0 snap-start">
                       <div class="bg-white px-5 py-4 rounded-xl border border-slate-300 shadow-sm">
-                        <p class="text-base font-semibold text-slate-900 mb-1 whitespace-nowrap">Nov 1, 2025</p>
+                        <p class="text-base font-semibold text-slate-900 mb-1 whitespace-nowrap">Jan 5, 2026</p>
                         <p class="text-sm text-slate-700 font-medium whitespace-nowrap">10:00 AM IST</p>
                         <p class="text-sm text-green-700 font-medium mt-2 whitespace-nowrap">45 seats left</p>
                       </div>
                     </div>
                     <div class="flex-shrink-0 snap-start">
                       <div class="bg-white px-5 py-4 rounded-xl border border-slate-300 shadow-sm">
-                        <p class="text-base font-semibold text-slate-900 mb-1 whitespace-nowrap">Nov 20, 2025</p>
+                        <p class="text-base font-semibold text-slate-900 mb-1 whitespace-nowrap">Jan 20, 2026</p>
                         <p class="text-sm text-slate-700 font-medium whitespace-nowrap">2:00 PM IST</p>
                         <p class="text-sm text-green-700 font-medium mt-2 whitespace-nowrap">50 seats left</p>
                       </div>
@@ -398,7 +414,7 @@
             </div>
           </div>
         </div>
-      <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script></section>
+      </section>
                 
       <section class="py-12 lg:py-16 bg-sky-50 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
